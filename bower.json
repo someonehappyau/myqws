@@ -1,0 +1,8 @@
+{
+  "name": "myqws",
+  "description": "myq web service",
+  "private": "true",
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+  }
+}
