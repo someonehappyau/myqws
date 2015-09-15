@@ -23,13 +23,14 @@ app.use(require('express-session')({
 //********* Routers ****************
 
 app.use('/img',require('./library/router/rtImageLib'));
+app.use('/mc',require('./library/router/rtMCModel'));
 
 //********* End Routers ************
 app.use('/',express.static(path.join(__dirname,'../apps/library')));
 //app.use('/bower',express.static(path.join(__dirname,'../bower_components')));
 app.use(express.static(__dirname + '/public'));
 
-app.listen(3010);
+app.listen(3011);
 
 process.on('uncaughtException', function (err) {
 	  console.log('Caught exception: ' + err);
