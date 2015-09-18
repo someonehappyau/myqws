@@ -8,16 +8,12 @@ function getImage(imgType,imgName,res){
 	var r;
 	if (imgType==='brand'){
 		r=fs.createReadStream(cfg.imageLib.model.brand+imgName);
-	}
-	else{
-		r=null;
-	}
-
-	if (!r){
-		res.status(404).end();
-	}
-	else{
-		r.pipe(res);
+		r.on('open',function(){
+			r.pipe(res);
+		});
+		r.on('error',function(err){
+			res.status(404).end();
+		});
 	}
 };
 

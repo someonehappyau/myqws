@@ -8,7 +8,14 @@ function getAll(callback){
 };
 
 function getAllByBrandName(brandName,callback){
-	pool.query('select * from MCModels where makerLabel=?',[brandName],callback);
+	pool.query('select * from MCMaker where label=?',[brandName],function(err,rows){
+		if (err)
+			callback(err,null);
+		else if (rows.length<=0)
+			callback(new Error(brandName+' not found'),null);
+		else
+			pool.query('select * from MCModels where makerLabel=?',[brandName],callback);
+	});
 };
 
 function getOneByNameAndYear(modelName,yearStart,yearEnd,callback){
