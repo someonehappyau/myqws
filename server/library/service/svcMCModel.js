@@ -31,8 +31,13 @@ function getOneByNameAndYear(modelName,yearStart,yearEnd,callback){
 	});
 };
 
+function getGalleryById(modelId,callback){
+	pool.query('select * from MCGalleries where model=? order by position',[modelId],callback);
+};
+
 module.exports={
 	getAll:getAll,
 	getAllByBrandName:getAllByBrandName,
 	getOneByNameAndYear:getOneByNameAndYear,
+	getGalleryById:getGalleryById,
 };

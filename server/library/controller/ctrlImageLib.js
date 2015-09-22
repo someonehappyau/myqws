@@ -15,6 +15,15 @@ function getImage(imgType,imgName,res){
 			res.status(404).end();
 		});
 	}
+	else if (imgType==='web'){
+		r=fs.createReadStream(cfg.imageLib.model.web+imgName);
+		r.on('open',function(){
+			r.pipe(res);
+		});
+		r.on('error',function(err){
+			res.status(404).end();
+		});
+	}
 };
 
 module.exports={
