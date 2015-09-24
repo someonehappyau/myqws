@@ -13,4 +13,8 @@ router.get('/model/:modelName',function(req,res){
 	ctrlMCModel.getOneByNameAndYear(req,res);
 });
 
+router.get('/model/specs/:modelName',function(req,res){
+	ctrlMCModel.getOneSpecsByNameAndYear(req,res);
+});
+
 module.exports=router;
