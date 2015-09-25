@@ -229,11 +229,12 @@ function getOneSpecsByNameAndYear(req,res){
 function composeModelSpecs(data){
 	var ret=[];
 
-	//console.log(data);
+	var engContent=[];
+	var frameContent=[];
+	var dimContent=[];
 
 	if (data.engine.length>0){
 		var eng=data.engine[0];
-		var engContent=[];
 
 		pushItem(engContent,'形式',eng.engTypeLabel+' '+eng.engCoolingLabel+' '+eng.engFormatLabel+eng.engCylCount+'气缸');
 		pushItem(engContent,'安装方式',eng.engMountLabel);
@@ -249,11 +250,10 @@ function composeModelSpecs(data){
 		pushItem(engContent,'点火控制',eng.engIgnitionLabel);
 		pushItem(engContent,'润滑方式',eng.engLubricationLabel);
 		pushItem(engContent,'启动方式',eng.engStartingLabel);
-
-		pushItem(ret,'发动机',engContent);		
 	}
 
-	var frameContent=[];
+	
+	
 	if (data.frame.length>0){
 		var frame=data.frame[0];
 
@@ -298,6 +298,8 @@ function composeModelSpecs(data){
 				);
 	};
 
+
+
 	if(data.wheel.length>0){
 		var wheel=data.wheel[0];
 
@@ -330,12 +332,7 @@ function composeModelSpecs(data){
 						drive.drvFinalDriveRatio1+
 						(drive.drvFinalDriveRatio2>0?(' / '+drive.drvFinalDriveRatio2):'')
 					);
-		
 	}
-
-	pushItem(ret,'车架结构',frameContent);
-
-	var dimContent=[];
 
 	if(data.dimension.length>0){
 		var dim=data.dimension[0];
@@ -355,12 +352,18 @@ function composeModelSpecs(data){
 			pushItem(dimContent,'油箱容量',dim.dimTankCapacity+' L'+
 						(dim.dimTankCapacityRes>0?(' （备用油 '+dim.dimTankCapacityRes+' L）'):'')
 					);
-
 	}
 
-	pushItem(ret,'尺寸',dimContent);
+	if (engContent.length===0)
+		pushItem(engContent,'','暂无资料');
+	if (frameContent.length===0)
+		pushItem(frameContent,'','暂无资料');
+	if (dimContent.length===0)
+		pushItem(dimContent,'','暂无资料');
 
-	//console.log(JSON.stringify(ret));
+	pushItem(ret,'发动机',engContent);		
+	pushItem(ret,'车架结构',frameContent);
+	pushItem(ret,'尺寸',dimContent);
 
 	return ret;
 };
