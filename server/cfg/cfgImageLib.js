@@ -9,7 +9,8 @@ var imageLibPath=
 	},
 	race:{
 		motogp:path.join(__dirname,'../../../imageLib/manual/race/motogp/')
-	}
+	},
+	misc:path.join(__dirname,'../../../imageLib/manual/misc/')
 };
 
 module.exports=imageLibPath

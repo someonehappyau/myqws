@@ -17,6 +17,9 @@ function getImage(req,res){
 	else if (imgType==='motogp'){
 		r=fs.createReadStream(cfg.imageLib.race.motogp+imgName);
 	}
+	else if (imgType==='misc'){
+		r=fs.createReadStream(cfg.imageLib.misc+imgName);
+	}
 	
 	r.on('open',function(){
 		r.pipe(res);
